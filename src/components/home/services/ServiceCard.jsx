@@ -5,13 +5,15 @@ const ServiceCard = ({ service }) => {
   console.log(service);
   return (
     <div className="card bg-base-100 shadow-xl">
-      <figure>
-        <img src={img} alt={title} className="h-60 w-full" />
+      <figure className="p-6 rounded-lg">
+        <img src={img} alt={title} className="h-60 w-full rounded-lg" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{title}</h2>
+        <h2 className="card-title text-2xl font-bold">{title}</h2>
         <div className="flex justify-between">
-          <div className="proce">Price : ${price}</div>
+          <div className="proce text-lg font-bold text-prime">
+            Price : ${price}
+          </div>
           <button className="">
             <svg
               xmlns="http://www.w3.org/2000/svg"
