@@ -1,17 +1,23 @@
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
   const links = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        {" "}
         <NavLink to="/signin">Sign In</NavLink>
       </li>
-
+      {user?.email && (
+        <li>
+          <NavLink to="/bookings">My Bookings</NavLink>
+        </li>
+      )}
       <li>
         <NavLink to="/signup">Sign Up</NavLink>
       </li>

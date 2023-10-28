@@ -3,8 +3,10 @@ import { createBrowserRouter } from "react-router-dom";
 import SignIn from "../components/pages/signin/SignIn.jsx";
 import SignUp from "../components/pages/signup/SignUp.jsx";
 import App from "../App.jsx";
+import PrivateRoute from "./PrivateRoute";
 import ServicesDetails from "../components/home/services/ServicesDetails";
 import BookServices from "../components/pages/bookservices/BookService";
+import Bookings from "../components/pages/bookings/Bookings";
 
 const router = createBrowserRouter([
   {
@@ -36,16 +38,15 @@ const router = createBrowserRouter([
         path: "signup",
         element: <SignUp />,
       },
-      // {
-      //   path: "book/:id",
-      //   // element: <PrivateRoute><BookService></BookService></PrivateRoute>,
-      //   // loader: ({ params }) =>
-      //   //   fetch(`http://localhost:5000/services/${params.id}`),
-      // },
-      // {
-      //   path: "bookings",
-      //   // element: <PrivateRoute><Bookings></Bookings></PrivateRoute>
-      // },
+
+      {
+        path: "/bookings",
+        element: (
+          <PrivateRoute>
+            <Bookings />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);
