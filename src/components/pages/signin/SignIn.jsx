@@ -35,7 +35,7 @@ const SignIn = () => {
       .catch((error) => console.log(error));
   };
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero min-h-screen ">
       <div className="hero-content flex-col lg:flex-row">
         <div className="w-1/2 mr-12">
           <img src={img} alt="" />
