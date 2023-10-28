@@ -38,7 +38,7 @@ const BookingCard = ({ booking, handleDelete, handleBookingConfirm }) => {
           <span className="font-bold text-primary">Confirmed</span>
         ) : (
           <button
-            // onClick={() => handleBookingConfirm(_id)}
+            onClick={() => handleBookingConfirm(_id)}
             className="btn btn-ghost btn-xs"
           >
             Please Confirm

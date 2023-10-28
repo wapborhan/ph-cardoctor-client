@@ -1,26 +1,41 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logOut();
+    navigate("/");
+  };
   const links = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
-      <li>
-        <NavLink to="/signin">Sign In</NavLink>
-      </li>
-      {user?.email && (
-        <li>
-          <NavLink to="/bookings">My Bookings</NavLink>
-        </li>
+
+      {user?.email ? (
+        <>
+          <li>
+            <NavLink to="/bookings">My Bookings</NavLink>
+          </li>
+          <li>
+            <button onClick={handleLogout}>Logout</button>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink to="/signin">Sign In</NavLink>
+          </li>
+          <li>
+            <NavLink to="/signup">Sign Up</NavLink>
+          </li>
+        </>
       )}
-      <li>
-        <NavLink to="/signup">Sign Up</NavLink>
-      </li>
     </>
   );
   return (
