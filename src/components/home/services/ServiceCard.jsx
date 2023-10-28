@@ -1,7 +1,7 @@
-import React from "react";
+import { NavLink } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
-  const { img, title, price } = service;
+  const { _id, img, title, price } = service;
   // console.log(service);
   return (
     <div className="card bg-base-100 shadow-xl">
@@ -14,7 +14,7 @@ const ServiceCard = ({ service }) => {
           <div className="proce text-lg font-bold text-prime">
             Price : ${price}
           </div>
-          <button className="">
+          <NavLink to={`/services/${_id}`} className="">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -30,7 +30,7 @@ const ServiceCard = ({ service }) => {
                 strokeLinejoin="round"
               />
             </svg>
-          </button>
+          </NavLink>
         </div>
       </div>
     </div>
