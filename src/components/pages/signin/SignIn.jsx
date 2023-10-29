@@ -8,7 +8,6 @@ const SignIn = () => {
   const { signIn } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -22,9 +21,13 @@ const SignIn = () => {
         console.log(loggedInUser);
         const user = { email };
 
+        // if (loggedInUser) {
+        //   navigate(location?.state ? location?.state : "/");
+        // }
+
         // get access token
         axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .post("http://localhost:3300/jwt", user, { withCredentials: true })
           .then((res) => {
             console.log(res.data);
             if (res.data.success) {

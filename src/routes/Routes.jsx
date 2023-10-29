@@ -19,24 +19,33 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3300/services"),
       },
       {
-        path: "/services/:id",
-        element: <ServicesDetails />,
-        loader: ({ params }) =>
-          fetch(`http://localhost:3300/services/${params.id}`),
-      },
-      {
-        path: "/checkout/:id",
-        element: <BookServices />,
-        loader: ({ params }) =>
-          fetch(`http://localhost:3300/services/${params.id}`),
-      },
-      {
         path: "signin",
         element: <SignIn />,
       },
       {
         path: "signup",
         element: <SignUp />,
+      },
+      {
+        path: "/services/:id",
+
+        element: (
+          <PrivateRoute>
+            <ServicesDetails />{" "}
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3300/services/${params.id}`),
+      },
+      {
+        path: "/checkout/:id",
+        element: (
+          <PrivateRoute>
+            <BookServices />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3300/services/${params.id}`),
       },
 
       {
