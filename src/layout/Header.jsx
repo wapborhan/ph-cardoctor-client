@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import axios from "axios";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -10,6 +11,10 @@ const Header = () => {
   const handleLogout = () => {
     logOut();
     navigate("/");
+    axios
+      .post("http://localhost:3300/logout", "logout")
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   };
   const links = (
     <>

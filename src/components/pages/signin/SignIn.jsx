@@ -21,19 +21,19 @@ const SignIn = () => {
         console.log(loggedInUser);
         const user = { email };
 
-        // if (loggedInUser) {
-        //   navigate(location?.state ? location?.state : "/");
-        // }
+        if (loggedInUser) {
+          navigate(location?.state ? location?.state : "/");
+        }
 
         // get access token
-        axios
-          .post("http://localhost:3300/jwt", user, { withCredentials: true })
-          .then((res) => {
-            console.log(res.data);
-            if (res.data.success) {
-              navigate(location?.state ? location?.state : "/");
-            }
-          });
+        // axios
+        //   .post("http://localhost:3300/jwt", user, { withCredentials: true })
+        //   .then((res) => {
+        //     console.log(res.data);
+        //     if (res.data.success) {
+        //       navigate(location?.state ? location?.state : "/");
+        //     }
+        //   });
       })
       .catch((error) => console.log(error));
   };

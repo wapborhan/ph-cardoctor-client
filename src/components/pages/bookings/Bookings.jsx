@@ -6,12 +6,16 @@ import axios from "axios";
 const Bookings = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
+  const [message, setMessage] = useState("");
 
   const url = `http://localhost:3300/bookings?email=${user?.email}`;
   useEffect(() => {
     axios
       .get(url, { withCredentials: true })
-      .then((res) => setBookings(res.data));
+      .then((res) => setBookings(res.data))
+      .catch((err) => {
+        setMessage("Data couldn't be loaded. Please try again later.");
+      });
   }, [url]);
 
   const handleDelete = (id) => {
@@ -58,33 +62,38 @@ const Bookings = () => {
     <div>
       <h2 className="text-5xl">Your bookings: {bookings.length}</h2>
       <div className="overflow-x-auto w-full">
-        <table className="table w-full">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>Image</th>
-              <th>Service</th>
-              <th>Date</th>
-              <th>Price</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookings.map((booking) => (
-              <BookingCard
-                key={booking._id}
-                booking={booking}
-                handleDelete={handleDelete}
-                handleBookingConfirm={handleBookingConfirm}
-              ></BookingCard>
-            ))}
-          </tbody>
-        </table>
+        {bookings.length > 0 ? (
+          <table className="table w-full">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>
+                  <label>
+                    <input type="checkbox" className="checkbox" />
+                  </label>
+                </th>
+                <th>Image</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {bookings.map((booking) => (
+                <BookingCard
+                  key={booking._id}
+                  booking={booking}
+                  handleDelete={handleDelete}
+                  handleBookingConfirm={handleBookingConfirm}
+                ></BookingCard>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p className="text-center">{message}</p>
+        )}
       </div>
     </div>
   );
