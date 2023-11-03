@@ -2,21 +2,23 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
 import BookingCard from "../bookings/BookingCard";
 import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Bookings = () => {
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
   const [bookings, setBookings] = useState([]);
   const [message, setMessage] = useState("");
 
-  const url = `http://localhost:3300/bookings?email=${user?.email}`;
+  const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
-    axios
-      .get(url, { withCredentials: true })
+    axiosSecure
+      .get(url)
       .then((res) => setBookings(res.data))
       .catch((err) => {
         setMessage("Data couldn't be loaded. Please try again later.");
       });
-  }, [url]);
+  }, [url, axiosSecure]);
 
   const handleDelete = (id) => {
     const proceed = confirm("Are You sure you want to delete");
