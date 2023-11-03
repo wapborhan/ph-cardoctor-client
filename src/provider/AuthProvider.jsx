@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
       const userEmail = currentUser?.email || user?.email;
       const loggedInUser = { email: userEmail };
       setUser(currentUser);
-      // console.log("current user", currentUser.email);
+      console.log("current user", currentUser.email);
       if (currentUser) {
         axios
           .post("http://localhost:3300/jwt", loggedInUser, {
