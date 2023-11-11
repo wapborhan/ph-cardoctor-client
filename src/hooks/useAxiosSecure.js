@@ -4,7 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
-const axiosSecure = axios.create({
+export const axiosSecure = axios.create({
   baseURL: "http://localhost:3300",
   withCredentials: true,
 });
@@ -12,7 +12,7 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
-  console.log(logOut);
+  // console.log(logOut);
 
   axiosSecure.interceptors.response.use(
     (res) => {

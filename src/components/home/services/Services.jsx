@@ -1,6 +1,13 @@
+import { useState } from "react";
 import ServiceCard from "./ServiceCard";
+import useServices from "../../../hooks/useServices";
 
-const Services = ({ services }) => {
+const Services = () => {
+  const [asc, setAsc] = useState(true);
+  const [min, setMin] = useState(true);
+  const [max, setMax] = useState(true);
+  const services = useServices(asc, min, max);
+
   return (
     <div className="my-10">
       <div className="title text-center space-y-6 my-10">
@@ -11,6 +18,14 @@ const Services = ({ services }) => {
           humour, or randomised words which {"don't"} look even slightly
           believable.
         </p>
+        <button
+          className="btn btn-accent"
+          onClick={() => {
+            setAsc(!asc);
+          }}
+        >
+          {asc ? "Price High to Low" : "Price Low To high"}
+        </button>
       </div>
       <div className="grid grid-cols-3 gap-4">
         {services?.map((service, idx) => {

@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <App />,
-        loader: () => fetch("http://localhost:3300/services"),
+        // loader: () => fetch("http://localhost:3300/services"),
       },
       {
         path: "signin",
